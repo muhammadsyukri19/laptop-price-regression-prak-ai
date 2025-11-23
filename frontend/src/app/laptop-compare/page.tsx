@@ -277,9 +277,9 @@ export default function LaptopComparePage() {
   if (loadingOptions) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-        <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="w-16 h-16 border-4 border-slate-200 border-t-sky-500 rounded-full animate-spin"></div>
-          <p className="text-slate-500 text-sm">Memuat data dari backend...</p>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-3 border-slate-200 border-t-slate-900 rounded-full animate-spin"></div>
+          <p className="text-slate-600 text-sm font-medium">Loading options from backend...</p>
         </div>
       </div>
     );
@@ -290,11 +290,11 @@ export default function LaptopComparePage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
         <div className="text-center max-w-md">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-semibold mb-2">Gagal memuat data</h2>
-          <p className="text-slate-500 mb-6">{error}</p>
-          <button onClick={() => window.location.reload()} className="rounded-full bg-sky-500 px-6 py-3 text-sm font-semibold text-white hover:bg-sky-600">
-            Muat Ulang
+          <div className="text-5xl mb-4">⚠️</div>
+          <h2 className="text-xl font-bold text-slate-900 mb-2">Failed to Load Data</h2>
+          <p className="text-slate-600 mb-6 text-sm">{error}</p>
+          <button onClick={() => window.location.reload()} className="px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+            Reload Page
           </button>
         </div>
       </div>
@@ -306,68 +306,79 @@ export default function LaptopComparePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900">
-      <main className="max-w-6xl mx-auto px-4 py-12">
-        {/* Header */}
-        <section className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-sky-600 to-violet-600 bg-clip-text text-transparent">Bandingkan Model Laptop</h1>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto">Pilih spesifikasi dari dataset dan dapatkan estimasi harga menggunakan Machine Learning</p>
-        </section>
+    <div className="min-h-screen bg-white text-slate-900">
+      {/* Header dengan gradient subtle */}
+      <header className="border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-slate-900 mb-1">Compare Laptops</h1>
+              <p className="text-sm text-slate-500">Select specifications and predict prices using ML</p>
+            </div>
+            <a href="/" className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+              ← Back to Home
+            </a>
+          </div>
+        </div>
+      </header>
 
+      <main className="max-w-7xl mx-auto px-6 py-12">
         <form onSubmit={handlePredict}>
-          {/* Dua kartu compare */}
-          <section className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Card Laptop A */}
-            <LaptopCard title="Laptop 1" accentColor="sky" form={laptopA} price={priceA} options={options} onChange={(e) => handleChange("A", e)} isLoading={loading} />
+          {/* Cards Grid */}
+          <div className="grid lg:grid-cols-2 gap-6 mb-8">
+            <LaptopCard title="Laptop 1" form={laptopA} price={priceA} options={options} onChange={(e) => handleChange("A", e)} isLoading={loading} />
+            <LaptopCard title="Laptop 2" form={laptopB} price={priceB} options={options} onChange={(e) => handleChange("B", e)} isLoading={loading} />
+          </div>
 
-            {/* Card Laptop B */}
-            <LaptopCard title="Laptop 2" accentColor="violet" form={laptopB} price={priceB} options={options} onChange={(e) => handleChange("B", e)} isLoading={loading} />
-          </section>
-
-          <div className="flex justify-center mb-10">
+          {/* Action Button */}
+          <div className="flex justify-center mb-8">
             <button
               type="submit"
               disabled={loading}
-              className="group relative rounded-full bg-gradient-to-r from-sky-500 to-violet-500 px-10 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-60 disabled:hover:scale-100 transition-all duration-200"
+              className="px-8 py-3.5 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Menghitung prediksi...
+                  Calculating predictions...
                 </span>
               ) : (
-                "🚀 Prediksi Harga Kedua Laptop"
+                "Predict Both Laptops"
               )}
             </button>
           </div>
         </form>
 
-        {/* Price Comparison Highlight */}
+        {/* Price Comparison */}
         {priceA != null && priceB != null && priceDiff != null && (
-          <section className="mb-10 max-w-md mx-auto">
-            <div className="bg-gradient-to-r from-sky-50 to-violet-50 border border-sky-200 rounded-2xl p-6 text-center">
-              <p className="text-sm text-slate-600 mb-2">Selisih Harga</p>
-              <p className="text-3xl font-bold text-sky-600 mb-2">{formatIDRFromEuro(priceDiff)}</p>
-              <p className="text-sm text-slate-500">
-                {cheaperLaptop} <span className="font-semibold">lebih murah</span>
+          <div className="max-w-md mx-auto mb-8">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 text-center">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-medium mb-2">Price Difference</p>
+              <p className="text-3xl font-bold text-slate-900 mb-1">{formatIDRFromEuro(priceDiff)}</p>
+              <p className="text-sm text-slate-600">
+                {cheaperLaptop} is <span className="font-semibold">cheaper</span>
               </p>
             </div>
-          </section>
+          </div>
         )}
 
-        {/* Ringkasan ala Apple */}
-        <section className="border-t border-slate-200 pt-10">
-          <h2 className="text-2xl font-semibold text-center mb-8">Ringkasan</h2>
-          <div className="grid md:grid-cols-2 gap-8 text-center">
+        {/* Summary Section */}
+        <div className="border-t border-slate-100 pt-10">
+          <h2 className="text-xl font-bold text-slate-900 text-center mb-8">Summary</h2>
+          <div className="grid lg:grid-cols-2 gap-6">
             <SummaryCard label="Laptop 1" form={laptopA} price={priceA} />
             <SummaryCard label="Laptop 2" form={laptopB} price={priceB} />
           </div>
 
-          {error && <p className="mt-6 text-center text-sm text-red-500">❌ {error}</p>}
-        </section>
+          {error && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-700 text-center">⚠️ {error}</p>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
@@ -377,7 +388,6 @@ export default function LaptopComparePage() {
 
 type LaptopCardProps = {
   title: string;
-  accentColor: "sky" | "violet";
   form: LaptopForm;
   price: number | null;
   options: Options;
@@ -385,72 +395,60 @@ type LaptopCardProps = {
   isLoading?: boolean;
 };
 
-function LaptopCard({ title, accentColor, form, price, options, onChange, isLoading = false }: LaptopCardProps) {
-  const accent = accentColor === "sky" ? "text-sky-500 border-sky-500" : "text-violet-500 border-violet-500";
-
+function LaptopCard({ title, form, price, options, onChange, isLoading = false }: LaptopCardProps) {
   const priceTextIDR = formatIDRFromEuro(price);
-  const priceTextEUR = price == null ? "" : `≈ € ${price.toFixed(2)}`;
+  const priceTextEUR = price == null ? "" : `€${price.toFixed(2)}`;
 
   return (
-    <div
-      className={`border-2 ${
-        accentColor === "sky" ? "border-sky-200 hover:border-sky-300" : "border-violet-200 hover:border-violet-300"
-      } rounded-3xl px-6 py-8 flex flex-col items-center shadow-md hover:shadow-xl transition-all duration-300 bg-white`}
-    >
-      <p className={`text-xs uppercase tracking-wide mb-1 font-semibold ${accentColor === "sky" ? "text-sky-600" : "text-violet-600"}`}>{title}</p>
-      <h2 className="text-xl font-bold mb-3 text-center min-h-[3rem] flex items-center">
-        {form.Company || "Brand"} {form.Product ? form.Product.substring(0, 20) : ""}
-      </h2>
-
-      <div className={`w-40 h-28 rounded-2xl ${accentColor === "sky" ? "bg-gradient-to-br from-sky-100 to-sky-50" : "bg-gradient-to-br from-violet-100 to-violet-50"} mb-4 flex items-center justify-center shadow-inner`}>
-        <span className="text-6xl">💻</span>
+    <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+      {/* Header */}
+      <div className="mb-6 pb-4 border-b border-slate-100">
+        <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">{title}</p>
+        <h3 className="text-lg font-bold text-slate-900 truncate">
+          {form.Company || "Select Brand"} {form.Product ? `• ${form.Product.substring(0, 25)}` : ""}
+        </h3>
       </div>
 
-      <p className="text-sm text-slate-500 mb-2">Estimasi Harga</p>
-      {isLoading ? (
-        <div className="h-16 flex items-center justify-center">
-          <div className="animate-pulse text-slate-400">Menghitung...</div>
-        </div>
-      ) : (
-        <>
-          <p className="text-2xl font-bold mb-1">{priceTextIDR}</p>
-          {price != null && <p className="text-xs text-slate-500 mb-6">{priceTextEUR}</p>}
-        </>
-      )}
+      {/* Price Display */}
+      <div className="mb-6 p-4 bg-slate-50 rounded-lg text-center">
+        <p className="text-xs text-slate-500 mb-1">Estimated Price</p>
+        {isLoading ? (
+          <div className="h-12 flex items-center justify-center">
+            <div className="animate-pulse text-slate-400 text-sm">Calculating...</div>
+          </div>
+        ) : (
+          <>
+            <p className="text-2xl font-bold text-slate-900">{priceTextIDR}</p>
+            {price != null && <p className="text-xs text-slate-500 mt-1">{priceTextEUR}</p>}
+          </>
+        )}
+      </div>
 
-      <div className="w-full space-y-3 text-sm">
-        {/* Company */}
+      {/* Form Fields */}
+      <div className="space-y-4 text-sm">
         <SelectField label="Brand" name="Company" value={form.Company} options={options.companies} onChange={onChange} disabled={isLoading} />
 
-        {/* Product */}
-        <SelectField label="Product / Seri" name="Product" value={form.Product} options={options.products} onChange={onChange} disabled={isLoading} />
+        <SelectField label="Product / Series" name="Product" value={form.Product} options={options.products} onChange={onChange} disabled={isLoading} />
 
-        {/* TypeName & Inches */}
         <div className="grid grid-cols-2 gap-3">
-          <SelectField label="Tipe" name="TypeName" value={form.TypeName} options={options.typenames} onChange={onChange} disabled={isLoading} />
-          <SelectField label="Layar (inch)" name="Inches" value={form.Inches} options={options.inches.map((v) => String(v))} displayFormatter={(v) => `${v}"`} onChange={onChange} disabled={isLoading} />
+          <SelectField label="Type" name="TypeName" value={form.TypeName} options={options.typenames} onChange={onChange} disabled={isLoading} />
+          <SelectField label="Screen" name="Inches" value={form.Inches} options={options.inches.map((v) => String(v))} displayFormatter={(v) => `${v}"`} onChange={onChange} disabled={isLoading} />
         </div>
 
-        {/* ScreenResolution */}
-        <SelectField label="Resolusi Layar" name="ScreenResolution" value={form.ScreenResolution} options={options.screen_resolutions} onChange={onChange} disabled={isLoading} />
+        <SelectField label="Resolution" name="ScreenResolution" value={form.ScreenResolution} options={options.screen_resolutions} onChange={onChange} disabled={isLoading} />
 
-        {/* CPU */}
-        <SelectField label="CPU" name="Cpu" value={form.Cpu} options={options.cpus} onChange={onChange} disabled={isLoading} />
+        <SelectField label="Processor (CPU)" name="Cpu" value={form.Cpu} options={options.cpus} onChange={onChange} disabled={isLoading} />
 
-        {/* RAM & Weight */}
         <div className="grid grid-cols-2 gap-3">
-          <SelectField label="RAM (GB)" name="Ram" value={form.Ram} options={options.rams_gb.map((v) => String(v))} displayFormatter={(v) => `${v} GB`} onChange={onChange} disabled={isLoading} />
-          <SelectField label="Berat (kg)" name="Weight" value={form.Weight} options={options.weights.map((v) => String(v))} displayFormatter={(v) => `${v} kg`} onChange={onChange} disabled={isLoading} />
+          <SelectField label="RAM" name="Ram" value={form.Ram} options={options.rams_gb.map((v) => String(v))} displayFormatter={(v) => `${v} GB`} onChange={onChange} disabled={isLoading} />
+          <SelectField label="Weight" name="Weight" value={form.Weight} options={options.weights.map((v) => String(v))} displayFormatter={(v) => `${v} kg`} onChange={onChange} disabled={isLoading} />
         </div>
 
-        {/* Memory */}
         <SelectField label="Storage" name="Memory" value={form.Memory} options={options.memories} onChange={onChange} disabled={isLoading} />
 
-        {/* GPU */}
-        <SelectField label="GPU" name="Gpu" value={form.Gpu} options={options.gpus} onChange={onChange} disabled={isLoading} />
+        <SelectField label="Graphics (GPU)" name="Gpu" value={form.Gpu} options={options.gpus} onChange={onChange} disabled={isLoading} />
 
-        {/* OS */}
-        <SelectField label="Sistem Operasi" name="OpSys" value={form.OpSys} options={options.opsys} onChange={onChange} disabled={isLoading} />
+        <SelectField label="Operating System" name="OpSys" value={form.OpSys} options={options.opsys} onChange={onChange} disabled={isLoading} />
       </div>
     </div>
   );
@@ -467,18 +465,17 @@ type SelectFieldProps = {
 };
 
 function SelectField({ label, name, value, options, onChange, displayFormatter, disabled = false }: SelectFieldProps) {
-  // buang duplikat & memoize
   const uniqueOptions = useMemo(() => Array.from(new Set(options)), [options]);
 
   return (
     <div>
-      <label className="block mb-1 text-xs font-medium text-slate-600">{label}</label>
+      <label className="block mb-1.5 text-xs font-semibold text-slate-700">{label}</label>
       <select
         name={name}
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200 bg-white disabled:bg-slate-50 disabled:cursor-not-allowed transition-all"
+        className="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-100 bg-white disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed transition-all"
       >
         {uniqueOptions.map((opt, idx) => (
           <option key={`${name}-${idx}`} value={opt}>
@@ -498,30 +495,50 @@ type SummaryProps = {
 
 function SummaryCard({ label, form, price }: SummaryProps) {
   const priceTextIDR = formatIDRFromEuro(price);
-  const priceTextEUR = price == null ? "" : `≈ € ${price.toFixed(2)}`;
+  const priceTextEUR = price == null ? "" : `€${price.toFixed(2)}`;
 
   return (
-    <div>
-      <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">{label}</p>
-      <h3 className="text-lg font-semibold mb-2">
-        {form.Company} {form.Product}
-      </h3>
-      <p className="text-4xl font-semibold mb-4">
-        {form.Inches}
-        &quot;
-      </p>
-      <p className="text-sm text-slate-500 mb-1">{form.ScreenResolution}</p>
-      <p className="text-sm text-slate-500 mb-1">
-        {form.Cpu} • {form.Ram}GB RAM
-      </p>
-      <p className="text-sm text-slate-500 mb-1">
-        {form.Memory} • {form.Gpu}
-      </p>
-      <p className="text-sm text-slate-500 mb-2">
-        {form.OpSys} • {form.Weight} kg
-      </p>
-      <p className="mt-3 text-base font-semibold">Prediksi harga: {priceTextIDR}</p>
-      {price != null && <p className="text-xs text-slate-500">{priceTextEUR}</p>}
+    <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+      <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">{label}</p>
+
+      <div className="space-y-3">
+        <div>
+          <h4 className="text-base font-bold text-slate-900">
+            {form.Company} {form.Product}
+          </h4>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <p className="text-xs text-slate-500">Screen</p>
+            <p className="font-medium text-slate-700">{form.Inches}&quot;</p>
+          </div>
+          <div>
+            <p className="text-xs text-slate-500">Type</p>
+            <p className="font-medium text-slate-700">{form.TypeName}</p>
+          </div>
+        </div>
+
+        <div>
+          <p className="text-xs text-slate-500 mb-1">Specifications</p>
+          <div className="space-y-1 text-xs text-slate-600">
+            <p>• {form.Cpu}</p>
+            <p>
+              • {form.Ram}GB RAM • {form.Memory}
+            </p>
+            <p>• {form.Gpu}</p>
+            <p>
+              • {form.OpSys} • {form.Weight} kg
+            </p>
+          </div>
+        </div>
+
+        <div className="pt-3 border-t border-slate-200">
+          <p className="text-xs text-slate-500 mb-1">Predicted Price</p>
+          <p className="text-xl font-bold text-slate-900">{priceTextIDR}</p>
+          {price != null && <p className="text-xs text-slate-500">{priceTextEUR}</p>}
+        </div>
+      </div>
     </div>
   );
 }

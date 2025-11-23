@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-violet-50">
+    <div className="min-h-screen bg-slate-50">
       <main className="flex min-h-screen flex-col items-center justify-center px-6 py-12">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Logo/Icon */}
@@ -11,43 +11,40 @@ export default function Home() {
           </div>
 
           {/* Title */}
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-sky-600 to-violet-600 bg-clip-text text-transparent">Laptop Price Predictor</h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900">Laptop Price Predictor</h1>
 
           {/* Subtitle */}
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">Prediksi harga laptop menggunakan Machine Learning dengan model Linear Regression. Bandingkan spesifikasi dan dapatkan estimasi harga real-time.</p>
 
           {/* Features */}
           <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
-            <div className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-3xl mb-3">🤖</div>
-              <h3 className="font-semibold text-lg mb-2">Machine Learning</h3>
+              <h3 className="font-semibold text-lg mb-2 text-slate-900">Machine Learning</h3>
               <p className="text-sm text-slate-600">Model regresi terlatih dengan dataset 1300+ laptop</p>
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-3xl mb-3">⚡</div>
-              <h3 className="font-semibold text-lg mb-2">Real-time Prediction</h3>
+              <h3 className="font-semibold text-lg mb-2 text-slate-900">Real-time Prediction</h3>
               <p className="text-sm text-slate-600">Prediksi instan dengan FastAPI backend</p>
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-3xl mb-3">📊</div>
-              <h3 className="font-semibold text-lg mb-2">Compare Models</h3>
+              <h3 className="font-semibold text-lg mb-2 text-slate-900">Compare Models</h3>
               <p className="text-sm text-slate-600">Bandingkan 2 laptop sekaligus side-by-side</p>
             </div>
           </div>
 
           {/* CTA Button */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-            <Link
-              href="/laptop-compare"
-              className="group relative rounded-full bg-gradient-to-r from-sky-500 to-violet-500 px-10 py-4 text-base font-semibold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-            >
+            <Link href="/laptop-compare" className="px-10 py-4 bg-slate-900 text-white rounded-lg text-base font-semibold shadow-sm hover:bg-slate-800 transition-colors">
               🚀 Mulai Bandingkan Laptop
             </Link>
             <a
               href="https://github.com/muhammadsyukri19/laptop-price-regression-prak-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 hover:border-slate-400 hover:bg-slate-50 transition-all"
+              className="flex items-center gap-2 border border-slate-300 px-8 py-4 rounded-lg text-base font-semibold text-slate-700 hover:border-slate-400 hover:bg-white transition-colors"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -63,11 +60,11 @@ export default function Home() {
           {/* Tech Stack */}
           <div className="mt-16 pt-8 border-t border-slate-200">
             <p className="text-sm text-slate-500 mb-4">Powered by</p>
-            <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600">
-              <span className="px-4 py-2 bg-white rounded-full shadow-sm">Next.js 15</span>
-              <span className="px-4 py-2 bg-white rounded-full shadow-sm">FastAPI</span>
-              <span className="px-4 py-2 bg-white rounded-full shadow-sm">Scikit-learn</span>
-              <span className="px-4 py-2 bg-white rounded-full shadow-sm">Tailwind CSS</span>
+            <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-slate-700">
+              <span className="px-4 py-2 bg-white border border-slate-200 rounded-lg">Next.js 15</span>
+              <span className="px-4 py-2 bg-white border border-slate-200 rounded-lg">FastAPI</span>
+              <span className="px-4 py-2 bg-white border border-slate-200 rounded-lg">Scikit-learn</span>
+              <span className="px-4 py-2 bg-white border border-slate-200 rounded-lg">Tailwind CSS</span>
             </div>
           </div>
         </div>
