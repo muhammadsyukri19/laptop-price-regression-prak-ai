@@ -315,9 +315,14 @@ export default function LaptopComparePage() {
               <h1 className="text-3xl font-bold text-slate-900 mb-1">Compare Laptops</h1>
               <p className="text-sm text-slate-500">Select specifications and predict prices using ML</p>
             </div>
-            <a href="/" className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              ← Back to Home
-            </a>
+            <div className="flex items-center gap-4">
+              <a href="/visualizations" className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+                📊 Visualizations
+              </a>
+              <a href="/" className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+                ← Back to Home
+              </a>
+            </div>
           </div>
         </div>
       </header>

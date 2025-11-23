@@ -30,8 +30,8 @@ export default function Home() {
             </div>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-3xl mb-3">📊</div>
-              <h3 className="font-semibold text-lg mb-2 text-slate-900">Compare Models</h3>
-              <p className="text-sm text-slate-600">Bandingkan 2 laptop sekaligus side-by-side</p>
+              <h3 className="font-semibold text-lg mb-2 text-slate-900">Data Insights</h3>
+              <p className="text-sm text-slate-600">Visualisasi interaktif untuk analisis pasar</p>
             </div>
           </div>
 
@@ -40,11 +40,18 @@ export default function Home() {
             <Link href="/laptop-compare" className="px-10 py-4 bg-slate-900 text-white rounded-lg text-base font-semibold shadow-sm hover:bg-slate-800 transition-colors">
               🚀 Mulai Bandingkan Laptop
             </Link>
+            <Link href="/visualizations" className="px-10 py-4 border border-slate-300 text-slate-700 rounded-lg text-base font-semibold hover:border-slate-400 hover:bg-white transition-colors">
+              📊 Lihat Visualisasi Data
+            </Link>
+          </div>
+
+          {/* GitHub Link */}
+          <div className="flex justify-center mt-6">
             <a
               href="https://github.com/muhammadsyukri19/laptop-price-regression-prak-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border border-slate-300 px-8 py-4 rounded-lg text-base font-semibold text-slate-700 hover:border-slate-400 hover:bg-white transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
