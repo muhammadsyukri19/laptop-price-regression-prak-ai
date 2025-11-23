@@ -27,7 +27,7 @@ MODEL_PATH = "lr_laptop_price_pipeline.pkl"
 model = joblib.load(MODEL_PATH)
 
 # Dataset untuk dropdown options
-DATA_PATH = os.path.join("..", "backend", "datasets", "laptop_price.csv")
+DATA_PATH = os.path.join("datasets", "laptop_price.csv")
 df_raw = pd.read_csv(DATA_PATH, encoding="latin1")
 
 
